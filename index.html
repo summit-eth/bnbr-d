@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en-us">
+<head>
+<!--script async src="https://www.googletagmanager.com/gtag/js?id=G-EFTK6S7YX7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-EFTK6S7YX7');
+</script-->
+<meta charset="utf-8">
+<link rel="icon" href="favicon.ico">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="manifest" href="site.webmanifest">
+<meta property="og:title" content="BNBRoyal / Docs">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://bnbroyal.io/docs">
+<meta property="og:image" content="https://bnbroyal.io/img/favicon.png">
+<meta property="og:description" content="Stake & Earn BNB up to 10% daily!">
+<style>body:not(.loaded) { visibility: hidden }</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Righteous&family=Source+Sans+Pro:wght@300;400;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/reset.css">
+<link rel="stylesheet" href="css/styles.css">
+<title>BNBRoyal / Docs</title>
+</head>
+<body class="loaded">
+
+<div id="root">
+
+    <div class="header">
+        <div class="wrapped">
+            <img src="img/hero-icon.png">
+            <h1>BNB<span>Royal</span></h1>
+            <button @click="goHome">back to homepage</button>
+        </div>
+    </div>
+    
+    <div class="content">
+        <div class="wrapped">
+            <div class="side">
+                <div class="doc links">
+                    <h2>Quick Links</h2>
+                    <button @click="openDoc1">Contract Overview</button><br>
+                    <button @click="openDoc2">Feature: Anti-Whale</button><br>
+                    <button @click="openDoc3">Audits</button><br>
+                    <button @click="openDoc4">Quick Guide</button><br>
+                </div>
+    
+                <div class="footer">
+                        bnbroyal.io &copy; 2021
+                </div>
+            </div>
+            <div class="main">
+                <div class="docs" v-bind:class="{active:docs.overview}">
+                    <h2>Welcome to <b>BNBRoyal</b>!</h2>
+                    <p>BNBRoyal is the newest Yield Farm project on the Binance Smart Chain.</p>
+                    <p>BNBRoyal is created as an experimental yield farm for the BSC community.</p>
+                    <hr>
+                    <h2>Contract Overview</h2>
+                    <p>BNBRoyal Smart Contract is a <a href="https://lmgtfy.app/?q=code+fork" target="_blank">fork</a> of the <a href="https://bscscan.com/address/0xEDe7cDec568456B1F1c117443C4B7Aef34C919cC#code" target="_blank">open-sourced smart contract</a> by <a href="https://bnbfactor.com" target="_blank">BNBFactor</a>.</p>
+                    <p>However, the <i>original</i> smart contract is <u>vulnerable</u> of <b>high value withdrawals</b>.</p>
+                    <p>To fix and fool-proof this exploit, the team has added an new feature, called <b>Anti-Whale</b>.</p>
+                </div>
+                <div class="docs" v-bind:class="{active:docs.antiwhale}">
+                    <h2>Feature: Anti-Whale</h2>
+                    <p>Users with high investment value can have high returns in less than a day.</p>
+                    <p>Because BNBRoyal offers high APR yields, an example of a whale investing 300 BNB can accumulate 24 BNB in 24 hours (in Plan 4 with 8% daily).</p>
+                    <p>To combat this exploit, we have added a few simple tweaks to the contract.</p>
+                    <br>
+                    <p>These few lines <u>limit users to be able to withdraw <b>a maximum of 20 BNB</b> per <b>24 hours</b></u>.</p>
+                    <br>
+                    <p>
+                        Because of this feature, wahles<!-- haha hello there! --> will only be able to withdraw &mdash; <b>20 BNB MAX</b> &mdash; and the excess BNB will be sent back to his BNBRoyal Account.
+                        The excess BNB can then be withdrawn on the <i>next available withdraw time</i> <b>(+24 hours)</b>.
+                    </p>
+                    <br>
+                    <p>Hence, users will <b>not</b> be able to withdraw <b>bulk amounts</b>.</p>
+                </div>
+                <div class="docs" v-bind:class="{active:docs.audits}">
+                    <h2>Audits</h2>
+                    <p>
+                        It is a <i>waste</i> of development funds to audit what has already been audited <u>multiple times</u>.
+                        The source of our smart contract has been forked and audited (even without modifications!) by <i>other projects</i>. <u>The audits found no vulnerabilities, no backdoors, no rugpulls</u>.
+                    </p>
+                    <br>
+                    <p>
+                        Check out the original contract audits of BNBFactor by <a href="https://www.certik.org/projects/bnbfactor">CertiK</a> &amp; <a href="https://hazecrypto.net/bnbfactor/">HazeCrypto</a>.
+                    </p>
+                    <br>
+                    <p>
+                        In line with this, the few lines of code that we added to create the <i>anti-whale feature</i> does not deem worthy of any audit as it is as simple as it can get.
+                    </p>
+                    <pre>Line 17: uint256 constant public MAX_WITHDRAW = 20 ether;
+Line 18: uint256 constant public WITHDRAW_COOLDOWN = 1 day;</pre>
+                    <pre>Line 143:
+if(
+    user.checkpoint.add(WITHDRAW_COOLDOWN) > block.timestamp
+) revert();
+Line 144: if(totalAmount > MAX_WITHDRAW) {
+Line 145:    user.bonus = totalAmount.sub(MAX_WITHDRAW);
+Line 146:    totalAmount = MAX_WITHDRAW;
+Line 147: }</pre>
+                    <p>It's just another quick <b>DYOR</b>.</p>
+                    <hr>
+                    <p>Check out BNBRoyal Smart Contract <a href="#">here</a>.</p>
+                </div>
+                <div class="docs" v-bind:class="{active:docs.guide}">
+                    <h2>Quick Guide</h2>
+                    <p>Please remember we are only using <b>BSC</b>(BEP20) BNB.</p>
+                    <p>Future releases will also use <b>BEP20</b> tokens.</p>
+                    <p>To have a hassle-free experience, we recommend using MetaMask or TrustWallet.</p>
+                    <hr>
+                    <h5>Plans</h5>
+                    <p>Investors can stake as many times as they want. There is no limit. But because we have an <u>anti-whale</u> algorithm
+                    built into the contract, we recommend users to stay under 250 BNB.</p>
+                    <br>
+                    <p>BNBRoyal offers 4 plans:</p>
+                    <p>Plan 1:<br>5% Daily for 90 days, totaling to 450%</p>
+                    <p>Plan 2:<br>6% Daily for 45 days, totaling to 270%</p>
+                    <p>Plan 3:<br>7% Daily for 30 days, totaling to 210%</p>
+                    <p>Plan 4:<br>8% Daily for 20 days, totaling to 160%</p>
+                    <br>
+                    <p>Minimum investment of <b>0.05 BNB</b> ~$30</p>
+                    <hr>
+                    <h5>Reinvesting &amp; Compounding</h5>
+                    <p>There is no reinvest/compound option in the contract, but because of this, users have complete control over their gains.</p>
+                    <hr>
+                    <h5>Referrals</h5>
+                    <p>Users also have the option to market our dApp and earn referral bonuses.</p>
+                    <p>Referral bonuses are automatically added to your BNBRoyal Account.</p>
+                    <p>Referral bonuses can be <u>earned</u> once you have <u>invested atleast once</u>.</p>
+                    <p>Referral bonuses are earned <u>everytime your referral invests</u>.</p>
+                    <p>Direct referrals are on <b>Level 1 at 5%</b>.</p>
+                    <p>Secondary referrals are on <b>Level 2 at 3%</b>.</p>
+                    <p>Tertiary referrals are on <b>Level 3 at 2%</b>.</p>
+                    <br>
+                    <p>That's about it!
+                    <br>
+                    If you have any questions, join our Telegram group <a href="#">@bnbroyalofficial</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!--div class="footer">
+        <div class="wrapped">
+            bnbroyal.io &copy; 2021
+        </div>
+    </div-->
+    
+</div>
+
+
+<script src="js/abi.contract.js"></script>
+<script src="js/vue.min.js"></script>
+<script src="js/web3.min.js"></script>
+<script src="js/web3m.min.js"></script>
+<script src="js/evm.min.js"></script>
+<script src="js/walletconnect.min.js"></script>
+<script src="js/app.js"></script>
+
+
+</body>
+</html>
