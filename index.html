@@ -19,9 +19,9 @@
 <link rel="manifest" href="site.webmanifest">
 <meta property="og:title" content="BNBRoyal / Docs">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://bnbroyal.io/docs">
-<meta property="og:image" content="https://bnbroyal.io/img/favicon.png">
-<meta property="og:description" content="Stake & Earn BNB up to 10% daily!">
+<meta property="og:url" content="https://docs.bnbroyal.io">
+<meta property="og:image" content="https://bnbroyal.io/img/banner.png">
+<meta property="og:description" content="Stake & Earn BNB up to 8% daily!">
 <style>body:not(.loaded) { visibility: hidden }</style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -30,14 +30,14 @@
 <link rel="stylesheet" href="css/styles.css">
 <title>BNBRoyal / Docs</title>
 </head>
-<body class="loaded">
+<body>
 
 <div id="root">
 
     <div class="header">
         <div class="wrapped">
-            <img src="img/hero-icon.png">
-            <h1>BNB<span>Royal</span></h1>
+            <img src="img/hero-icon.png" @click="goHome">
+            <h1 @click="goHome">BNB<span>Royal</span></h1>
             <button @click="goHome">back to homepage</button>
         </div>
     </div>
@@ -46,11 +46,11 @@
         <div class="wrapped">
             <div class="side">
                 <div class="doc links">
-                    <h2>Quick Links</h2>
-                    <button @click="openDoc1">Contract Overview</button><br>
-                    <button @click="openDoc2">Feature: Anti-Whale</button><br>
-                    <button @click="openDoc3">Audits</button><br>
-                    <button @click="openDoc4">Quick Guide</button><br>
+                    <button @click="openDoc1" :class="{active:docs.overview}">Contract Overview</button>
+                    <button @click="openDoc2" :class="{active:docs.antiwhale}">Feature: Anti-Whale</button>
+                    <button @click="openDoc3" :class="{active:docs.audits}">Audits</button>
+                    <button @click="openDoc4" :class="{active:docs.guide}">Quick Guide</button>
+                    <button @click="openDoc5" :class="{active:docs.dist}">Distribution</button>
                 </div>
     
                 <div class="footer">
@@ -59,17 +59,21 @@
             </div>
             <div class="main">
                 <div class="docs" v-bind:class="{active:docs.overview}">
+                    <img src="img/banner.png">
+                    <br><br>
                     <h2>Welcome to <b>BNBRoyal</b>!</h2>
-                    <p>BNBRoyal is the newest Yield Farm project on the Binance Smart Chain.</p>
+                    <hr>
+                    <p>The newest Yield Farm project on the Binance Smart Chain.</p>
                     <p>BNBRoyal is created as an experimental yield farm for the BSC community.</p>
                     <hr>
                     <h2>Contract Overview</h2>
                     <p>BNBRoyal Smart Contract is a <a href="https://lmgtfy.app/?q=code+fork" target="_blank">fork</a> of the <a href="https://bscscan.com/address/0xEDe7cDec568456B1F1c117443C4B7Aef34C919cC#code" target="_blank">open-sourced smart contract</a> by <a href="https://bnbfactor.com" target="_blank">BNBFactor</a>.</p>
                     <p>However, the <i>original</i> smart contract is <u>vulnerable</u> of <b>high value withdrawals</b>.</p>
-                    <p>To fix and fool-proof this exploit, the team has added an new feature, called <b>Anti-Whale</b>.</p>
+                    <p>To fix and fool-proof this exploit, the team has added a new feature: <b>Anti-Whale</b>.</p>
                 </div>
                 <div class="docs" v-bind:class="{active:docs.antiwhale}">
                     <h2>Feature: Anti-Whale</h2>
+                    <hr>
                     <p>Users with high investment value can have high returns in less than a day.</p>
                     <p>Because BNBRoyal offers high APR yields, an example of a whale investing 300 BNB can accumulate 24 BNB in 24 hours (in Plan 4 with 8% daily).</p>
                     <p>To combat this exploit, we have added a few simple tweaks to the contract.</p>
@@ -80,22 +84,22 @@
                         Because of this feature, wahles<!-- haha hello there! --> will only be able to withdraw &mdash; <b>20 BNB MAX</b> &mdash; and the excess BNB will be sent back to his BNBRoyal Account.
                         The excess BNB can then be withdrawn on the <i>next available withdraw time</i> <b>(+24 hours)</b>.
                     </p>
-                    <br>
-                    <p>Hence, users will <b>not</b> be able to withdraw <b>bulk amounts</b>.</p>
                 </div>
                 <div class="docs" v-bind:class="{active:docs.audits}">
                     <h2>Audits</h2>
+                    <hr>
                     <p>
                         It is a <i>waste</i> of development funds to audit what has already been audited <u>multiple times</u>.
-                        The source of our smart contract has been forked and audited (even without modifications!) by <i>other projects</i>. <u>The audits found no vulnerabilities, no backdoors, no rugpulls</u>.
+                        The source of our smart contract has been forked and audited (even without modifications!) by <i>other projects</i>.
+                        <u>Audit reports found no vulnerabilities, no backdoors, no rugpulls</u>.
                     </p>
                     <br>
                     <p>
-                        Check out the original contract audits of BNBFactor by <a href="https://www.certik.org/projects/bnbfactor">CertiK</a> &amp; <a href="https://hazecrypto.net/bnbfactor/">HazeCrypto</a>.
+                        Check out the original contract audits of BNBFactor by <a href="https://www.certik.org/projects/bnbfactor" target="_blank">CertiK</a> &amp; <a href="https://hazecrypto.net/bnbfactor/" target="_blank">HazeCrypto</a>.
                     </p>
                     <br>
                     <p>
-                        In line with this, the few lines of code that we added to create the <i>anti-whale feature</i> does not deem worthy of any audit as it is as simple as it can get.
+                        The few lines of code that were added to create the <i>anti-whale feature</i> do not deem worthy of any audit as it is as simple as it can get.
                     </p>
                     <pre>Line 17: uint256 constant public MAX_WITHDRAW = 20 ether;
 Line 18: uint256 constant public WITHDRAW_COOLDOWN = 1 day;</pre>
@@ -109,10 +113,11 @@ Line 146:    totalAmount = MAX_WITHDRAW;
 Line 147: }</pre>
                     <p>It's just another quick <b>DYOR</b>.</p>
                     <hr>
-                    <p>Check out BNBRoyal Smart Contract <a href="#">here</a>.</p>
+                    <p>Check out BNBRoyal Smart Contract <a href="https://bscscan.com/address/0x619FA768816F04cAB3317A25ee7B786BC9Cb5074#code" target="_blank">here</a>.</p>
                 </div>
                 <div class="docs" v-bind:class="{active:docs.guide}">
                     <h2>Quick Guide</h2>
+                    <hr>
                     <p>Please remember we are only using <b>BSC</b>(BEP20) BNB.</p>
                     <p>Future releases will also use <b>BEP20</b> tokens.</p>
                     <p>To have a hassle-free experience, we recommend using MetaMask or TrustWallet.</p>
@@ -143,18 +148,23 @@ Line 147: }</pre>
                     <br>
                     <p>That's about it!
                     <br>
-                    If you have any questions, join our Telegram group <a href="#">@bnbroyalofficial</a></p>
+                    If you have any questions, join our Telegram group <a href="https://t.me/bnbroyalofficial">@bnbroyalofficial</a></p>
+                </div>
+                <div class="docs" v-bind:class="{active:docs.dist}">
+                    <h2>Funds Distribution</h2>
+                    <p>In order for the community to increase in growth, the following is a break-down of funds:</p>
+                    <hr>
+                    <p>90% Platform main balance, using for participants payouts, affiliate program bonuses</p>
+                    <hr>
+                    <p>10% Promotion &amp; Support Work</p>
+                    <p> &middot; 2% Development, Platform, Technical Fees</p>
+                    <p> &middot; 2% Administration &amp; Support Work</p>
+                    <p> &middot; 6% Marketing &amp; Promotions</p>
                 </div>
             </div>
         </div>
     </div>
-    
-    <!--div class="footer">
-        <div class="wrapped">
-            bnbroyal.io &copy; 2021
-        </div>
-    </div-->
-    
+
 </div>
 
 
