@@ -27,7 +27,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Righteous&family=Source+Sans+Pro:wght@300;400;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/reset.css">
-<link rel="stylesheet" href="css/chunk.a4fc3da1b1.css">
+<link rel="stylesheet" href="css/styles.css?v=11212021">
 <title>BNBRoyal / Docs</title>
 </head>
 <body>
@@ -77,13 +77,6 @@
                     <p>Users with high investment value can have high returns in less than a day.</p>
                     <p>Because BNBRoyal offers high APR yields, an example of a whale investing 300 BNB can accumulate 24 BNB in 24 hours (in Plan 4 with 8% daily).</p>
                     <p>To combat this exploit, we have added a few simple tweaks to the contract.</p>
-                    <br>
-                    <p>These few lines <u>limit users to be able to withdraw <b>a maximum of 20 BNB</b> per <b>24 hours</b></u>.</p>
-                    <br>
-                    <p>
-                        "Wahle" investors<!-- haha hello there! --> will only be able to withdraw &mdash; <b>20 BNB MAX</b> &mdash; and the excess BNB will be sent back to his BNBRoyal Account.
-                        The excess BNB can then be withdrawn on the <i>next available withdraw time</i> <b>(+24 hours)</b>.
-                    </p>
                     <hr>
                     <h5>BNBRoyal Limits</h5>
                     <p>Withdrawal Cooldown: <b>24 Hours</b></p>
@@ -92,6 +85,10 @@
                     <h5>BUSDRoyal Limits</h5>
                     <p>Withdrawal Cooldown: <b>4 Hours</b></p>
                     <p>Maximum per Withdraw: <b>2000 BUSD</b></p>
+                    <hr>
+                    <h5>CAKERoyal Limits</h5>
+                    <p>Withdrawal Cooldown: <b>4 Hours</b></p>
+                    <p>Maximum per Withdraw: <b>100 CAKE</b></p>
                 </div>
                 <div class="docs" v-bind:class="{active:docs.audits}">
                     <h2>Audits</h2>
@@ -123,6 +120,7 @@ Line 147: }</pre>
                     <hr>
                     <p>Check out BNBRoyal Smart Contract <a href="https://bscscan.com/address/0x619FA768816F04cAB3317A25ee7B786BC9Cb5074#code" target="_blank">here</a>.</p>
                     <p>Check out BUSDRoyal Smart Contract <a href="https://bscscan.com/address/0xD3981cE564E331C8e34B95246415f3F3e29a0b8B#code" target="_blank">here</a>.</p>
+                    <p>Check out CAKERoyal Smart Contract <a href="https://bscscan.com/address/0xB0b02b8c610Cbbacd222ff5BA7103d7D443bf05B#code" target="_blank">here</a>.</p>
                 </div>
                 <div class="docs" v-bind:class="{active:docs.guide}">
                     <h2>Quick Guide</h2>
@@ -194,7 +192,7 @@ Line 147: }</pre>
 <script src="js/web3m.min.js"></script>
 <script src="js/evm.min.js"></script>
 <script src="js/walletconnect.min.js"></script>
-<script src="js/chunk.f3dc2dc8af.js"></script>
+<script src="js/app.js?v=11212021"></script>
 
 
 </body>
